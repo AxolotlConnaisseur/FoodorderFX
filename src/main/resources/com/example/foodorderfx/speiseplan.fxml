@@ -17,7 +17,7 @@
    <top>
       <FlowPane alignment="CENTER" prefHeight="96.0" prefWidth="959.0" styleClass="flow-pane" stylesheets="@style.css" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblHeadline" prefHeight="45.0" prefWidth="311.0" styleClass="lblHeadline" text="Speiseplan Erstellung" wrapText="true">
+            <Label fx:id="lblHeadline" styleClass="lblHeadline" text="Speiseplan Erstellung" wrapText="true">
                <font>
                   <Font size="24.0" />
                </font>
@@ -134,7 +134,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblNameA1" onMouseClicked="#openEditDialogue" prefHeight="21.0" prefWidth="132.0" text="Name A1" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblNameA1" onMouseClicked="#openEditDialogue" text="Name A1" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -142,7 +142,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblNameA2" onMouseClicked="#openEditDialogue" prefHeight="25.0" prefWidth="216.0" text="Name A2" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblNameA2" onMouseClicked="#openEditDialogue" text="Name A2" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -150,7 +150,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblNameA3" onMouseClicked="#openEditDialogue" prefHeight="25.0" prefWidth="177.0" text="Name A3" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblNameA3" onMouseClicked="#openEditDialogue" text="Name A3" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -158,7 +158,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblNameA4" onMouseClicked="#openEditDialogue" prefHeight="25.0" prefWidth="162.0" text="Name A4" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblNameA4" onMouseClicked="#openEditDialogue" text="Name A4" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -166,7 +166,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblNameA5" onMouseClicked="#openEditDialogue" prefHeight="25.0" prefWidth="189.0" text="Name A5" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblNameA5" onMouseClicked="#openEditDialogue" text="Name A5" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -199,7 +199,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </ImageView>
-            <Label fx:id="lblNameB1" onMouseClicked="#openEditDialogue" prefHeight="21.0" prefWidth="191.0" text="Name B1" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblNameB1" onMouseClicked="#openEditDialogue" text="Name B1" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -207,7 +207,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblNameB2" onMouseClicked="#openEditDialogue" prefHeight="25.0" prefWidth="191.0" text="Name B2" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblNameB2" onMouseClicked="#openEditDialogue" text="Name B2" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -215,7 +215,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblNameB3" onMouseClicked="#openEditDialogue" prefHeight="25.0" prefWidth="213.0" text="Name B3" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblNameB3" onMouseClicked="#openEditDialogue" text="Name B3" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -223,7 +223,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblNameB4" onMouseClicked="#openEditDialogue" prefHeight="25.0" prefWidth="203.0" text="Name B4" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblNameB4" onMouseClicked="#openEditDialogue" text="Name B4" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -231,7 +231,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblNameB5" onMouseClicked="#openEditDialogue" prefHeight="25.0" prefWidth="227.0" text="Name B5" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblNameB5" onMouseClicked="#openEditDialogue" text="Name B5" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>

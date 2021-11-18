@@ -14,12 +14,6 @@ public class Woche {
         this.kalenderWoche = kalenderWoche;
     }
 
-    /**
-     * Anforderung A02
-     * Übernimmt ein Array an Tagen in das Attribut tage[] von Woche
-     *
-     * @param tage der Woche
-     */
     public void wochenPlanErstellen(Tag[] tage) {
         this.tage = tage;
 
@@ -27,7 +21,7 @@ public class Woche {
 
     public Report wochenPlanAendern(Tag tag, int zuErsetzendeSpeiseMenuNr, Speise ersetzendeSpeise, Person[] allePersonen) {
         ArrayList<Person> betroffenePersonen = new ArrayList<>();
-//TODO
+
         for (int i = 0; i < tage.length; i++) {
             if (tage[i].equals(tag)) {
                 for (Person einePerson : allePersonen) {
