@@ -1,71 +1,56 @@
 package com.example.foodorderfx.logic;
 
-
-
 import com.example.foodorderfx.output.Report;
 
-import java.security.InvalidParameterException;
-
+@SuppressWarnings("ALL")
 public class Speise {
-
-    String name;
-    double preis;
-    int anzahlBestellungen;
+    public int anzahlBestellungen;
     private int menuNummer;
+    private String name;
+    private double preis;
 
-    public Speise(int menuNummer, String name) {
-        this.menuNummer = menuNummer;
-        this.name = name;
-
-    }
+    private String bild;
 
     public Speise(int menuNummer, String name, double preis) {
         this.menuNummer = menuNummer;
         this.name = name;
         this.preis = preis;
+
     }
 
-    public Speise(String bezeichnung, double preis) {
-        this.name = bezeichnung;
-        this.preis = preis;
-
-        if (preis < 0) {
-            throw new InvalidParameterException("Preis kleiner Null ist nicht möglich");
-        }
+    public Speise(int menuNummer, String name, double preis, String bild) {
+        this(menuNummer, name, preis);
+        this.bild = bild;
     }
+
     public static Report anzahlBestellungenAusgeben(Woche w) {
         StringBuilder ausgabeString = new StringBuilder();
         for (Tag tag : w.getTage()) {
             for (Speise speise : tag.getSpeisen()) {
-                ausgabeString.append(speise.getName()).append(": ").append(speise.anzahlBestellungen).append(" mal bestellt\n");
+                ausgabeString.append(speise.getName() + ": " + speise.anzahlBestellungen + " mal bestellt\n");
             }
         }
 
-        return new Report(ausgabeString.toString());
+        return new Report("Anzahl der Bestellungen",ausgabeString.toString());
     }
 
     public int getMenuNummer() {
         return menuNummer;
     }
 
-    public double getPreis() {
-        return preis;
-    }
-
     public String getName() {
         return name;
     }
 
-    public int getAnzahlBestellungen() {
-        return anzahlBestellungen;
+    public double getPreis() {
+        return preis;
     }
-
-    public void bestelle() {
-        anzahlBestellungen++;
-    }
-
 
     public void setPreis(double preis) {
         this.preis = preis;
+    }
+
+    public String getBild() {
+        return bild;
     }
 }

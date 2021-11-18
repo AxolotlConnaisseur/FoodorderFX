@@ -1,14 +1,11 @@
 package com.example.foodorderfx.logic;
 
-
-
-
 import com.example.foodorderfx.output.Report;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("ALL")
 public class Gruppe {
-
     private String bezeichnung;
     private ArrayList<Person> mitglieder;
 
@@ -30,22 +27,26 @@ public class Gruppe {
     }
 
     public Report bestellungenAusgeben() {
-        StringBuilder bestellungen = new StringBuilder();
+        String bestellungen = "";
         for (Person einzelPerson : mitglieder) {
-            bestellungen.append(einzelPerson.getVorname()).append(" ").append(einzelPerson.getNachname()).append(": \n");
+            bestellungen += einzelPerson.getVorname() + " " + einzelPerson.getNachname() + ": \n";
 
             for (int i = 0; i < 5; i++) {
-                bestellungen.append(einzelPerson.getAusgewaehlteSpeise().get(i).getName()).append("\n");
+                bestellungen += einzelPerson.getAusgewaehlteSpeisen().get(i).getName() + "\n";
             }
-            bestellungen.append("\n");
+            bestellungen += "\n";
         }
-        Report bestellungenReport = new Report(bestellungen.toString());
+        Report bestellungenReport = new Report("Bestellungen der Gruppe",bestellungen);
         System.out.println(bestellungenReport.getInhalt());
         return bestellungenReport;
     }
 
     public void mitgliedEntfernen(Person p) {
-        mitglieder.removeIf(mitglied -> mitglied.equals(p));
+        for (Person mitglied : mitglieder) {
+            if (mitglied.equals(p)) {
+                mitglieder.remove(mitglied);
+            }
+
+        }
     }
 }
-

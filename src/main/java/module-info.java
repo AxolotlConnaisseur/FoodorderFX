@@ -3,6 +3,7 @@ module com.example.foodorderfx {
     requires javafx.fxml;
     requires  kernel;
     requires layout;
+    requires io;
 
 
     opens com.example.foodorderfx to javafx.fxml;

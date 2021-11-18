@@ -33,7 +33,7 @@ public class Bestellung {
         this.person = person;
         this.speise = speise;
         bestellungen.add(this);
-        speise.bestelle();
+     //   speise.bestelle();
 
     }
 

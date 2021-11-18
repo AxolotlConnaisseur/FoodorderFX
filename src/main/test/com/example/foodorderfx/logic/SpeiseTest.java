@@ -6,7 +6,7 @@ class SpeiseTest {
 
     @Test
     void setPreis() {
-        Speise sp = new Speise(1, "Tacos");
+        Speise sp = new Speise(1, "Tacos",3.8);
         sp.setPreis(4.99);
     }
 
@@ -16,7 +16,7 @@ class SpeiseTest {
         Person p2 = new Person("Hans", "Hansi");
 
 
-        Woche wTest = new Woche();
+        Woche wTest = new Woche("kw30");
 
         Tag[] tage = new Tag[]{new Tag("Montag"), new Tag("Dienstag"), new Tag("Mittwoch"), new Tag("Donnerstag"), new Tag("Freitag")};
         tage[0].setSpeisen(new Speise[]{new Speise(1, "Hackbraten", 2.12), new Speise(0, "Gemueseauflauf", 2.10)});
