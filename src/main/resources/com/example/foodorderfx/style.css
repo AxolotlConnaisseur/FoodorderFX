@@ -1,0 +1,51 @@
+.root {
+   -fx-background-color: #DD9D46;
+   -fx-text-fill: #ffffff;
+
+}
+.button, .text-field {
+  -fx-border-width: 2;
+  -fx-border-radius: 5;
+}
+.label, .button {
+    -fx-text-fill: #4D0906;
+}
+.label
+{
+    -fx-font-size: 14;
+
+}
+
+.button{
+    -fx-text-fill: #E6C799;
+    -fx-background-color: #4D0906;
+}
+.text-field {
+  -fx-background-color: #E6C799;
+  -fx-border-color:  #4D0906;
+  -fx-font-size: 15;
+}
+.special-text-field{
+    -fx-font-size: 15;
+    -fx-background-color: white;
+}
+.text-area .content {
+    -fx-background-color: #ff0000;
+}
+.flow-pane{
+    -fx-background-color: #E6C799;
+
+}
+.anchor-pane{
+-fx-background-color: #E6C799;
+}
+
+.lblHeadline{
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+}
+.lbl-extra-big-headline{
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+}
+

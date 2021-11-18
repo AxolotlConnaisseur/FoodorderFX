@@ -1,0 +1,17 @@
+public void fillDialogData(){
+        ArrayList<Gericht> gerichte = new ArrayList<>(Arrays.asList(
+                new Gericht(lblNameA1.getText(), preisA1.getText()),
+                new Gericht(lblNameB1.getText(), preisB1.getText()),
+                new Gericht(lblNameA2.getText(), preisB2.getText()),
+                new Gericht(lblNameB2.getText(), preisB2.getText()),
+                new Gericht(lblNameA3.getText(), preisA3.getText()),
+                new Gericht(lblNameB3.getText(), preisB3.getText()),
+                new Gericht(lblNameA4.getText(), preisA4.getText()),
+                new Gericht(lblNameB4.getText(), preisB4.getText()),
+                new Gericht(lblNameA5.getText(), preisA5.getText()),
+                new Gericht(lblNameB5.getText(), preisB5.getText())
+        ));
+        dialogData = gerichte;
+
+
+    }
