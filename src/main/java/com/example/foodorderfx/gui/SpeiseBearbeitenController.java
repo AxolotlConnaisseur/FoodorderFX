@@ -1,5 +1,8 @@
-package com.example.foodorderfx;
+package com.example.foodorderfx.gui;
 
+import com.example.foodorderfx.DeleteCheckApp;
+import com.example.foodorderfx.SpeiseplanApp;
+import com.example.foodorderfx.used.Gericht;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -140,7 +143,7 @@ public class SpeiseBearbeitenController {
         Stage hauptfenster = (Stage) btDelete.getScene().getWindow();
         Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(DeleteCheckApp.class.getResource("deleteCheck.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SpeiseplanApp.class.getResource("deleteCheck.fxml"));
         Parent root = fxmlLoader.load();
         stage.setTitle("Gericht wirklich löschen?");
 

@@ -1,4 +1,4 @@
-package com.example.foodorderfx;
+package com.example.foodorderfx.gui;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;

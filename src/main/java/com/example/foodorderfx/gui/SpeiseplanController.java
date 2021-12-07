@@ -1,5 +1,10 @@
-package com.example.foodorderfx;
+package com.example.foodorderfx.gui;
 
+import com.example.foodorderfx.SpeiseplanApp;
+import com.example.foodorderfx.logic.Tag;
+import com.example.foodorderfx.logic.Woche;
+import com.example.foodorderfx.output.PDFWriter;
+import com.example.foodorderfx.used.Gericht;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -17,13 +22,14 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class SpeiseplanController {
@@ -110,6 +116,8 @@ public class SpeiseplanController {
     @FXML
     Label lblHeadline;
     @FXML
+    Button pdfErstellen;
+    @FXML
     public static Gericht gerichtTransfer;
 
 
@@ -118,7 +126,7 @@ public class SpeiseplanController {
 
     static ClickedControls relevantControls;
 
-    static ArrayList<Gericht> showDialog(ArrayList<Gericht> gerichte) throws IOException {
+    public static ArrayList<Gericht> showDialog(ArrayList<Gericht> gerichte) throws IOException {
 
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(SpeiseplanApp.class.getResource("speiseplan.fxml"));
@@ -176,6 +184,18 @@ public class SpeiseplanController {
     public void initialize() {
         relevantControls = new ClickedControls(this);
         setKwSpinner();
+    }
+
+    @FXML
+    public void erstellePDF(ActionEvent event) throws MalformedURLException, FileNotFoundException {
+
+        Woche w = new Woche(kwSpinner.getValue().toString());
+        for (Tag tag: w.getTage()) {
+            // tag.setSpeisen();
+
+        }
+        PDFWriter.printWochenplan(w);
+
     }
 
     @FXML

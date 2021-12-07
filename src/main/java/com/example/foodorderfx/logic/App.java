@@ -1,7 +1,6 @@
 package com.example.foodorderfx.logic;
 
 
-import com.example.foodorderfx.SpeiseplanController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

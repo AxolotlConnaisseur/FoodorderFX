@@ -1,5 +1,7 @@
 package com.example.foodorderfx;
 
+import com.example.foodorderfx.gui.SpeiseplanController;
+import com.example.foodorderfx.used.Gericht;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

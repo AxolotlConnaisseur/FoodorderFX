@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 
 public class PDFWriter {
+
     public static final String REPORT_PATH = "src/main/resources/com/example/foodorderfx/";
     public static final String IMAGE_PATH = REPORT_PATH + "Bilder/";
     public static final float IMAGE_HEIGTH = 115F;

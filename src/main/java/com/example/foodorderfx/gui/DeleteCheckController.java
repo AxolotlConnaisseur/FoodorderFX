@@ -1,4 +1,4 @@
-package com.example.foodorderfx;
+package com.example.foodorderfx.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
