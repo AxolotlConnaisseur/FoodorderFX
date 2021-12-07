@@ -4,7 +4,9 @@ import com.example.foodorderfx.SpeiseplanApp;
 import com.example.foodorderfx.logic.Tag;
 import com.example.foodorderfx.logic.Woche;
 import com.example.foodorderfx.output.PDFWriter;
+import com.example.foodorderfx.pdf.FranziReport;
 import com.example.foodorderfx.used.Gericht;
+import com.example.foodorderfx.used.Speiseplan;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -189,12 +191,13 @@ public class SpeiseplanController {
     @FXML
     public void erstellePDF(ActionEvent event) throws MalformedURLException, FileNotFoundException {
 
-        Woche w = new Woche(kwSpinner.getValue().toString());
-        for (Tag tag: w.getTage()) {
-            // tag.setSpeisen();
-
-        }
-        PDFWriter.printWochenplan(w);
+        //TODO dummy werte durch echte Werte ersetzen, die aus den Controls ausgelesen werden
+       Speiseplan speiseplan = new  Speiseplan();
+       for(int i = 0; i < 10; i++) {
+           speiseplan.addGericht(i, new Gericht("dummy "+ i, "99.99 " + i));
+       }
+       FranziReport f = new FranziReport(speiseplan);
+       f.druckeSpeiseplan();
 
     }
 
