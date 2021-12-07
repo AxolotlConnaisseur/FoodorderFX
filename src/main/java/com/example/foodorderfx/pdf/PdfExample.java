@@ -1,4 +1,4 @@
-package com.example.foodorderfx.temp;
+package com.example.foodorderfx.pdf;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -9,13 +9,13 @@ public class PdfExample {
 
     public static void main(String args[]) throws Exception {
         // Creating a PdfWriter
-        String dest = "C:\\Users\\franz\\IdeaProjects\\FoodorderFX\\src\\main\\resources\\com\\example\\foodorderfx\\generated.pdf";
+        String dest = "C:\\Users\\Franzi\\FoodorderFX\\src\\main\\resources\\com\\example\\foodorderfx\\generated\\test.pdf";
         PdfWriter writer = new PdfWriter(dest);
         // Creating a PdfDocument
         PdfDocument pdf = new PdfDocument(writer);
         // Creating a Document
         Document document = new Document(pdf);
-        String para1 = "This is a generated document";
+        String para1 = "Dienstag siebter Dez";
         String para2 = "This is a second paragraph";
         // Creating Paragraphs
         Paragraph paragraph1 = new Paragraph(para1);

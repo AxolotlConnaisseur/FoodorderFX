@@ -14,4 +14,6 @@ module com.example.foodorderfx {
     opens com.example.foodorderfx.temp to javafx.fxml;
     exports com.example.foodorderfx.gui;
     opens com.example.foodorderfx.gui to javafx.fxml;
+    exports com.example.foodorderfx.pdf;
+    opens com.example.foodorderfx.pdf to javafx.fxml;
 }
