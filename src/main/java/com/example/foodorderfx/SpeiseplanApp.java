@@ -3,6 +3,7 @@ package com.example.foodorderfx;
 import com.example.foodorderfx.gui.SpeiseplanController;
 import com.example.foodorderfx.used.Gericht;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ public class SpeiseplanApp extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-
         ArrayList<Gericht> gerichte = new ArrayList<>(Arrays.asList(
                 new Gericht("Montag A", "1"),
                 new Gericht("Montag B", "2"),

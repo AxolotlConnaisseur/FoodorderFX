@@ -148,7 +148,7 @@ public class SpeiseBearbeitenController {
 
 
         stage.setScene(new Scene(root));
-        root.setStyle("-fx-background-image: url(File:///C:/Users/franz/Pictures/Speiseplan/Pngs/Warning.png); -fx-background-position: center center;-fx-background-size: 200 200;" +
+        root.setStyle("-fx-background-image: url(File:///C:/Users/Franzi/FoodorderFX/src/main/resources/com/example/foodorderfx/Bilder/Warning.png); -fx-background-position: center center;-fx-background-size: 200 200;" +
                 "-fx-background-repeat: no-repeat;");
         stage.initOwner(hauptfenster);
         stage.initModality(Modality.WINDOW_MODAL);

@@ -11,7 +11,7 @@ public class ClickedControls {
 
     ArrayList<Label> nameLabels;
     ArrayList<Label> preisLabels;
-    ArrayList<ImageView> imageViews;
+    public static ArrayList<ImageView> imageViews;
 
 
     SpeiseplanController controller;
