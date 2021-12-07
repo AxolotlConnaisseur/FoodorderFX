@@ -201,6 +201,7 @@ public class SpeiseplanController {
        }
        FranziReport f = new FranziReport(speiseplan);
        f.druckeSpeiseplan();
+       f.druckePdfSpeiseplan();
 
     }
 
