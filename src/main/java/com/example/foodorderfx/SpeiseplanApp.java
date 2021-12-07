@@ -17,25 +17,20 @@ public class SpeiseplanApp extends Application {
     public void start(Stage stage) throws Exception {
 
         ArrayList<Gericht> gerichte = new ArrayList<>(Arrays.asList(
-                new Gericht("Schnitzel mit Pommes", "1"),
-                new Gericht("Schnitzel mit Salzkartoffel", "2"),
-                new Gericht("Pommes", "0.3"),
-                new Gericht("Schnitzel", "4"),
-                new Gericht("Schnitzel", "5"),
-                new Gericht("Schnitzel", "6"),
-                new Gericht("Schnitzel", "7"),
-                new Gericht("Schnitzel", "8"),
-                new Gericht("Schnitzel", "9"),
-                new Gericht("Schnitzel", "10")
+                new Gericht("Montag A", "1"),
+                new Gericht("Montag B", "2"),
+                new Gericht("Dienstag A", "0.3"),
+                new Gericht("Dienstag B", "4"),
+                new Gericht("Mittwoch A", "5"),
+                new Gericht("Mittwoch B", "6"),
+                new Gericht("Donnerstag A", "7"),
+                new Gericht("Donnerstag B", "8"),
+                new Gericht("Freitag A", "9"),
+                new Gericht("Freitag B", "10")
                 ));
 
         gerichte = SpeiseplanController.showDialog(gerichte);
 
-        Gericht montagA = gerichte.get(0);
-        Gericht montagB = gerichte.get(1);
-
-        System.out.println(montagA);
-        System.out.println(montagB);
 
     }
 

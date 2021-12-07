@@ -193,8 +193,11 @@ public class SpeiseplanController {
 
         //TODO dummy werte durch echte Werte ersetzen, die aus den Controls ausgelesen werden
        Speiseplan speiseplan = new  Speiseplan();
+       speiseplan.setKw(kwSpinner.getValue());
        for(int i = 0; i < 10; i++) {
-           speiseplan.addGericht(i, new Gericht("dummy "+ i, "99.99 " + i));
+           speiseplan.addGericht(i, new Gericht(relevantControls.nameLabels.get(i).getText(),
+                   relevantControls.preisLabels.get(i).getText()));
+
        }
        FranziReport f = new FranziReport(speiseplan);
        f.druckeSpeiseplan();

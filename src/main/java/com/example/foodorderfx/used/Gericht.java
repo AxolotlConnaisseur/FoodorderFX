@@ -25,11 +25,9 @@ public class Gericht {
 
     @Override
     public String toString() {
-        return "Gericht{" +
+        return "Gericht:" +
                 "gerichtName='" + gerichtName + '\'' +
-                ", gerichtImg=" + gerichtImg +
-                ", gerichtPreis='" + gerichtPreis + '\'' +
-                '}';
+                ", gerichtPreis='" + gerichtPreis + '\'';
     }
 
     public String getGerichtName() {
