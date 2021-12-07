@@ -1,6 +1,5 @@
 package com.example.foodorderfx.gui;
 
-import com.example.foodorderfx.DeleteCheckApp;
 import com.example.foodorderfx.SpeiseplanApp;
 import com.example.foodorderfx.used.Gericht;
 import javafx.event.ActionEvent;
