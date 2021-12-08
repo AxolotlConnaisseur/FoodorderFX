@@ -1,10 +1,7 @@
 package com.example.foodorderfx.pdf;
 
 
-import com.example.foodorderfx.gui.ClickedControls;
 import com.example.foodorderfx.gui.SpeiseplanController;
-import com.example.foodorderfx.logic.Woche;
-import com.example.foodorderfx.output.Report;
 import com.example.foodorderfx.used.Gericht;
 import com.example.foodorderfx.used.Speiseplan;
 import com.itextpdf.io.image.ImageData;
@@ -20,14 +17,18 @@ import com.itextpdf.layout.element.Table;
 
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-// Dieses Klasse erzeugt ein PDF File fuer einen Speiseplan
+/**
+ * Dieses Klasse erzeugt ein PDF File für einen Speiseplan
+ */
+
 public class FranziReport {
 
     private Speiseplan speiseplan;
-    public static final String REPORT_PATH = "src/main/resources/com/example/foodorderfx/";
-    public static final String IMAGE_PATH = REPORT_PATH + "Bilder/";
+    public static Gericht[] gerichteA = new Gericht[5];
+    public static Gericht[] gerichteB = new Gericht[5];
     public static final float IMAGE_HEIGTH = 115F;
     public static final float IMAGE_WIDTH = 130F;
 
@@ -36,7 +37,7 @@ public class FranziReport {
     }
 
 
-    public void druckePdfSpeiseplan(ArrayList<String> bilderPfade) {
+    public void druckePdfSpeiseplan() {
 
         String dest = "C:\\Users\\Franzi\\FoodorderFX\\src\\main\\resources\\com\\example\\foodorderfx\\generated\\" + "Reports.pdf";
         try {
@@ -45,15 +46,15 @@ public class FranziReport {
             PdfDocument pdf = new PdfDocument(writer);
             pdf.setDefaultPageSize(PageSize.A4.rotate());
             Document document = new Document(pdf);
-            float[] pointColumnWidths = {190F, 150F, 150F, 150F, 150F, 150F};
+            float[] pointColumnWidths = {290F, 150F, 150F, 150F, 150F, 150F};
             Table table = new Table(pointColumnWidths);
 
             addCellWithParagraph(table, "KW " + speiseplan.getKw(), 16F);
 
 
-            String[] wochendaten = {"1", "2", "3", "4", "5"};
-            for (String datum : wochendaten) {
-                addCellWithParagraph(table, datum, 16F);
+            for (LocalDate datum : SpeiseplanController.gewaehlteWoche) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM");
+                addCellWithParagraph(table, datum.format(dtf), 16F);
             }
             addCellWithParagraph(table, "", 16F);
 
@@ -63,23 +64,8 @@ public class FranziReport {
                 addCellWithParagraph(table, tag, 16F);
             }
 
-            addCellWithParagraph(table, "Gericht A", 16F);
-          //ArrayList<Gericht> gerichteA = new ArrayList<>();
-          //for (int i = 0; i < 5; i++) {
-          //    gerichteA.add(speiseplan.)
-          //}
-            for (int i = 0; i < 5; i++) {
-
-                Image img = createImage(IMAGE_HEIGTH, IMAGE_WIDTH,bilderPfade.get(0));
-                addCellWithImageAndParagraph(table, img,
-                        speiseplan.getGericht(i).gerichtName, 14F);
-
-            }
-
-            //erstelleZeileGericht(table, w, "Gericht A", 0);
-            //erstelleZeilePreis(table, w, 0);
-            //erstelleZeileGericht(table, w, "Gericht B", 1);
-            //erstelleZeilePreis(table, w, 1);
+            erstelleReihenVonGericht(table, "Gericht A", gerichteA);
+            erstelleReihenVonGericht(table, "Gericht B", gerichteB);
 
             document.add(table);
             document.close();
@@ -96,10 +82,31 @@ public class FranziReport {
 
     }
 
+    private void erstelleReihenVonGericht(Table table, String gerichtKategorie, Gericht[] gerichte) throws MalformedURLException {
+
+        addCellWithParagraph(table, gerichtKategorie, 14F);
+
+        for (Gericht gericht : gerichte) {
+            Image img = createImage(IMAGE_HEIGTH, IMAGE_WIDTH, gericht.gerichtImg.getUrl());
+            addCellWithImageAndParagraph(table, img,
+                    gericht.gerichtName, 14F);
+
+        }
+        addCellWithParagraph(table, "Preis:", 14F);
+
+        for (Gericht gericht : gerichte) {
+            addCellWithParagraph(table, gericht.gerichtPreis, 14F);
+
+        }
+    }
+
     private void addCellWithImageAndParagraph(Table table, Image image, String inhalt, float fontSize) {
         Cell cell = new Cell();
         Paragraph paragraph = new Paragraph(inhalt);
         paragraph.setFontSize(fontSize);
+        image.setMarginLeft(5F);
+        image.setMarginRight(5F);
+        image.setMarginTop(5F);
         cell.add(image);
         cell.add(paragraph);
         table.addCell(cell);
@@ -114,14 +121,10 @@ public class FranziReport {
     }
 
     private static Image createImage(float imageHeigth, float imageWidth, String imgPfad) throws MalformedURLException {
-        // Creating an ImageData object
         ImageData data = ImageDataFactory.create(imgPfad);
-        // Creating an Image object
         Image image = new Image(data);
         image.setHeight(imageHeigth);
         image.setWidth(imageWidth);
-        image.setMarginLeft(5);
-        image.setMarginTop(5);
 
         return image;
     }

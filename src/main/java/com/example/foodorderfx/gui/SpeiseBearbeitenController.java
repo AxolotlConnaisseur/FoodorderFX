@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -55,15 +56,18 @@ public class SpeiseBearbeitenController {
     }
 
     @FXML
-    public void choosePic() {
+    public void choosePic(MouseEvent mouseEvent) {
 
-        Stage stage = new Stage();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
-        File file = fileChooser.showOpenDialog(stage);
-        String path = file.getPath();
-        Image image = new Image("File:///" + path);
-        imgView.setImage(image);
+        if (mouseEvent.getClickCount() ==2){
+            Stage stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+            File file = fileChooser.showOpenDialog(stage);
+            String path = file.getPath();
+            Image image = new Image("File:///" + path);
+            imgView.setImage(image);
+        }
+
     }
 
     public void gerichtGiveBack() {
@@ -148,8 +152,8 @@ public class SpeiseBearbeitenController {
 
 
         stage.setScene(new Scene(root));
-        root.setStyle("-fx-background-image: url(File:///C:/Users/Franzi/FoodorderFX/src/main/resources/com/example/foodorderfx/Bilder/Warning.png); -fx-background-position: center center;-fx-background-size: 200 200;" +
-                "-fx-background-repeat: no-repeat;");
+     //  root.setStyle("-fx-background-image: url(File:///C:/Users/Franzi/FoodorderFX/src/main/resources/com/example/foodorderfx/Bilder/Warning.png); -fx-background-position: center center;-fx-background-size: 200 200;" +
+     //          "-fx-background-repeat: no-repeat;");
         stage.initOwner(hauptfenster);
         stage.initModality(Modality.WINDOW_MODAL);
 
@@ -168,12 +172,4 @@ public class SpeiseBearbeitenController {
         SpeiseplanController.gerichtTransfer.setGerichtPreis("Preis");
 
     }
-
-    @FXML
-    public void btFaelltAusClick() {
-        this.txtName.setText("Gericht fällt aus");
-        this.txtPreis.setText("0");
-        this.imgView.setImage(new Image("File:///C:/Users/franz/Pictures/Speiseplan/Pngs/Sorry.png"));
-    }
-
 }

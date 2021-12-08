@@ -122,14 +122,10 @@ public class SpeiseplanController {
     Button pdfErstellen;
     @FXML
     public static Gericht gerichtTransfer;
-    public static String[] gewaehlteWoche;
-    public static ArrayList<String> bilderPfade;
-
+    public static LocalDate[] gewaehlteWoche = new LocalDate[5];
 
     ArrayList<Gericht> dialogData;
 
-//Path currentDir = Paths.get(".");
-//System.out.println(currentDir.toAbsolutePath());
     static ClickedControls relevantControls;
 
     public static ArrayList<Gericht> showDialog(ArrayList<Gericht> gerichte) throws IOException {
@@ -155,33 +151,43 @@ public class SpeiseplanController {
 
         lblNameA1.setText(gerichte.get(0).gerichtName);
         preisA1.setText(gerichte.get(0).gerichtPreis);
+        imgViewA1.setImage(gerichte.get(0).gerichtImg);
 
         lblNameB1.setText(gerichte.get(1).gerichtName);
         preisB1.setText(gerichte.get(1).gerichtPreis);
+        imgViewB1.setImage(gerichte.get(1).gerichtImg);
 
         lblNameA2.setText(gerichte.get(2).gerichtName);
         preisA2.setText(gerichte.get(2).gerichtPreis);
+        imgViewA2.setImage(gerichte.get(2).gerichtImg);
 
         lblNameB2.setText(gerichte.get(3).gerichtName);
         preisB2.setText(gerichte.get(3).gerichtPreis);
+        imgViewB2.setImage(gerichte.get(3).gerichtImg);
 
         lblNameA3.setText(gerichte.get(4).gerichtName);
         preisA3.setText(gerichte.get(4).gerichtPreis);
+        imgViewA3.setImage(gerichte.get(4).gerichtImg);
 
         lblNameB3.setText(gerichte.get(5).gerichtName);
         preisB3.setText(gerichte.get(5).gerichtPreis);
+        imgViewB3.setImage(gerichte.get(5).gerichtImg);
 
         lblNameA4.setText(gerichte.get(6).gerichtName);
         preisA4.setText(gerichte.get(6).gerichtPreis);
+        imgViewA4.setImage(gerichte.get(6).gerichtImg);
 
         lblNameB4.setText(gerichte.get(7).gerichtName);
         preisB4.setText(gerichte.get(7).gerichtPreis);
+        imgViewB4.setImage(gerichte.get(7).gerichtImg);
 
         lblNameA5.setText(gerichte.get(8).gerichtName);
         preisA5.setText(gerichte.get(8).gerichtPreis);
+        imgViewA5.setImage(gerichte.get(8).gerichtImg);
 
         lblNameB5.setText(gerichte.get(9).gerichtName);
         preisB5.setText(gerichte.get(9).gerichtPreis);
+        imgViewB5.setImage(gerichte.get(9).gerichtImg);
 
     }
 
@@ -190,27 +196,28 @@ public class SpeiseplanController {
     public void initialize() {
         relevantControls = new ClickedControls(this);
         setKwSpinner();
+        datumAnpassen(null);
     }
 
     @FXML
-    public void erstellePDF(ActionEvent event) throws MalformedURLException, FileNotFoundException {
-        //Caused by: java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.add(Object)" because "com.example.foodorderfx.gui.SpeiseplanController.bilderPfade" is null
-        //Taucht nur auf wenn es aus dem array mit index i ausgelesen wird. Klappt wenn der integer einen festgelegten wert hat
-        //TODO dummy werte durch echte Werte ersetzen, die aus den Controls ausgelesen werden
+    public void erstellePDF(ActionEvent event) {
         Speiseplan speiseplan = new Speiseplan();
         speiseplan.setKw(kwSpinner.getValue());
         for (int i = 0; i < 10; i++) {
-            speiseplan.addGericht(i, new Gericht(relevantControls.nameLabels.get(i).getText(),// relevantControls.imageViews.get(i).getImage(),
+            speiseplan.addGericht(i, new Gericht(relevantControls.nameLabels.get(i).getText(), relevantControls.imageViews.get(i).getImage(),
                     relevantControls.preisLabels.get(i).getText()));
 
         }
 
-        for (ImageView imageView: relevantControls.imageViews) {
-            this.bilderPfade.add(imageView.getImage().getUrl());
-        }
         FranziReport f = new FranziReport(speiseplan);
+        for (int i = 0; i < 5; i++) {
+            FranziReport.gerichteA[i] = speiseplan.gerichte[i];
+        }
+        for (int i = 0; i < 5; i++) {
+            FranziReport.gerichteB[i] = speiseplan.gerichte[i + 5];
+        }
         f.druckeSpeiseplan();
-        f.druckePdfSpeiseplan(bilderPfade);
+        f.druckePdfSpeiseplan();
 
     }
 
@@ -289,7 +296,7 @@ public class SpeiseplanController {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM");
             for (LocalDate tag : woche) {
                 tageLblReihe.get(woche.indexOf(tag)).setText(tag.format(dtf));
-                //gewaehlteWoche[woche.indexOf(tag)] = tag.toString();
+                gewaehlteWoche[woche.indexOf(tag)] = tag;
             }
 
         } catch (NumberFormatException ignored) {
@@ -350,14 +357,9 @@ public class SpeiseplanController {
 
         String montagMenuA5Gericht = lblNameA5.getText();
         String montagMenuB5Gericht = lblNameB5.getText();
-        //      Gericht test = new Gericht(montagMenuA1Gericht, preisA1.getText());
 
         this.dialogData.get(0).setGerichtName(montagMenuA1Gericht);
-        //this.dialogData.get(0).setGerichtPreis(preisA1.getText());
-        //       this.dialogData.set(0, test);
         this.dialogData.get(1).setGerichtName(montagMenuB1Gericht);
-
-        System.out.println(montagMenuA1Gericht);
 
         this.dialogData.get(2).setGerichtName(montagMenuA2Gericht);
         this.dialogData.get(3).setGerichtName(montagMenuB2Gericht);
