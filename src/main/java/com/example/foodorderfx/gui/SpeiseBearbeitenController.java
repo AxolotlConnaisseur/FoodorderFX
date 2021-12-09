@@ -19,9 +19,11 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class SpeiseBearbeitenController {
+public class SpeiseBearbeitenController implements Serializable {
+    static final long serialVersionUID = 1L;
     @FXML
     private Button btCancel;
     @FXML
@@ -58,7 +60,7 @@ public class SpeiseBearbeitenController {
     @FXML
     public void choosePic(MouseEvent mouseEvent) {
 
-        if (mouseEvent.getClickCount() ==2){
+        if (mouseEvent.getClickCount() == 2) {
             Stage stage = new Stage();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open Resource File");
@@ -76,8 +78,8 @@ public class SpeiseBearbeitenController {
             this.imgView.setImage(emptyFill);
         }
         String parsedPreis = this.txtPreis.getText();
-        if(parsedPreis.contains(",")){
-            parsedPreis= parsedPreis.replace(',', '.');
+        if (parsedPreis.contains(",")) {
+            parsedPreis = parsedPreis.replace(',', '.');
         }
         String[] correctedInput = parsedPreis.split("\\h");
         System.out.println("SpeiseBearbeitenController gerichtGiveBack methode zeile 74 lässt grüßen" + correctedInput[0]);
@@ -152,8 +154,8 @@ public class SpeiseBearbeitenController {
 
 
         stage.setScene(new Scene(root));
-     //  root.setStyle("-fx-background-image: url(File:///C:/Users/Franzi/FoodorderFX/src/main/resources/com/example/foodorderfx/Bilder/Warning.png); -fx-background-position: center center;-fx-background-size: 200 200;" +
-     //          "-fx-background-repeat: no-repeat;");
+        //  root.setStyle("-fx-background-image: url(File:///C:/Users/Franzi/FoodorderFX/src/main/resources/com/example/foodorderfx/Bilder/Warning.png); -fx-background-position: center center;-fx-background-size: 200 200;" +
+        //          "-fx-background-repeat: no-repeat;");
         stage.initOwner(hauptfenster);
         stage.initModality(Modality.WINDOW_MODAL);
 

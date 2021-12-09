@@ -1,9 +1,6 @@
 package com.example.foodorderfx.gui;
 
 import com.example.foodorderfx.SpeiseplanApp;
-import com.example.foodorderfx.logic.Tag;
-import com.example.foodorderfx.logic.Woche;
-import com.example.foodorderfx.output.PDFWriter;
 import com.example.foodorderfx.pdf.FranziReport;
 import com.example.foodorderfx.used.Gericht;
 import com.example.foodorderfx.used.Speiseplan;
@@ -18,16 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,7 +30,8 @@ import java.time.temporal.IsoFields;
 import java.util.ArrayList;
 
 
-public class SpeiseplanController {
+public class SpeiseplanController implements Serializable {
+    static final long serialVersionUID = 1L;
     @FXML
     Spinner<Integer> kwSpinner;
     @FXML

@@ -4,10 +4,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ClickedControls {
+public class ClickedControls implements Serializable {
+    static final long serialVersionUID = 1L;
 
     ArrayList<Label> nameLabels;
     ArrayList<Label> preisLabels;

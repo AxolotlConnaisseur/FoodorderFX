@@ -1,10 +1,13 @@
 package com.example.foodorderfx.used;
 
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-public class Gericht {
+import javafx.scene.image.Image;
+
+import java.io.Serializable;
+
+
+public class Gericht implements Serializable {
+    static final long serialVersionUID = 1L;
     public String gerichtName;
     public Image gerichtImg;
     public String gerichtPreis;

@@ -8,6 +8,7 @@ import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
@@ -15,7 +16,7 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,8 +25,10 @@ import java.time.format.DateTimeFormatter;
  * Dieses Klasse erzeugt ein PDF File für einen Speiseplan
  */
 
-public class FranziReport {
+public class FranziReport implements Serializable {
+    static final long serialVersionUID = 1L;
 
+    public String dest = "C:\\Users\\Franzi\\OneDrive\\Desktop\\" + "Reports.pdf";
     private Speiseplan speiseplan;
     public static Gericht[] gerichteA = new Gericht[5];
     public static Gericht[] gerichteB = new Gericht[5];
@@ -36,10 +39,17 @@ public class FranziReport {
         this.speiseplan = speiseplan;
     }
 
+    public void oeffnePdf() throws IOException {
+        PdfReader pdfReader = new PdfReader(dest);
+
+
+    }
+
 
     public void druckePdfSpeiseplan() {
 
-        String dest = "C:\\Users\\Franzi\\FoodorderFX\\src\\main\\resources\\com\\example\\foodorderfx\\generated\\" + "Reports.pdf";
+        //String dest = "C:\\Users\\Franzi\\FoodorderFX\\src\\main\\resources\\com\\example\\foodorderfx\\generated\\" + "Reports.pdf";
+
         try {
             PdfWriter writer = new PdfWriter(dest);
             // Creating a PdfDocument

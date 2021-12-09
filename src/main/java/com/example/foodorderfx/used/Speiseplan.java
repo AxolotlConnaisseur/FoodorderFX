@@ -1,6 +1,9 @@
 package com.example.foodorderfx.used;
 
-public class Speiseplan {
+import java.io.Serializable;
+
+public class Speiseplan implements Serializable {
+    static final long serialVersionUID = 1L;
 
     public Gericht[] gerichte;
     private int kw;
