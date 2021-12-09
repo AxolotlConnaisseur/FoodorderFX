@@ -51,9 +51,6 @@ public class FranziReport implements Serializable {
 
 
     public void druckePdfSpeiseplan() {
-
-        //String dest = "C:\\Users\\Franzi\\FoodorderFX\\src\\main\\resources\\com\\example\\foodorderfx\\generated\\" + "Reports.pdf";
-
         try {
             PdfWriter writer = new PdfWriter(dest);
             // Creating a PdfDocument

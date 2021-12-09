@@ -105,6 +105,7 @@ public class SpeiseBearbeitenController implements Serializable {
         boolean preisRichtig = false;
         boolean nameRichtig = false;
 
+        //Validation of price input
         if (this.txtPreis.getText().matches("^\\d{1,8}(,\\d{1,2})?")) {
             preisRichtig = true;
 
@@ -118,6 +119,8 @@ public class SpeiseBearbeitenController implements Serializable {
             this.txtPreis.setText("Ungültiger Preis");
             this.txtPreis.requestFocus();
         }
+
+        //Validation of name input
         if (this.txtName.getText().matches("\\D++(\\s?\\D)*+")) {
             nameRichtig = true;
         } else {
@@ -154,8 +157,6 @@ public class SpeiseBearbeitenController implements Serializable {
 
 
         stage.setScene(new Scene(root));
-        //  root.setStyle("-fx-background-image: url(File:///C:/Users/Franzi/FoodorderFX/src/main/resources/com/example/foodorderfx/Bilder/Warning.png); -fx-background-position: center center;-fx-background-size: 200 200;" +
-        //          "-fx-background-repeat: no-repeat;");
         stage.initOwner(hauptfenster);
         stage.initModality(Modality.WINDOW_MODAL);
 
