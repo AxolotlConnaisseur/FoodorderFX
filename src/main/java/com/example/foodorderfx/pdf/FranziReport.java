@@ -16,6 +16,7 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 
+import java.awt.*;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.time.LocalDate;
@@ -40,8 +41,11 @@ public class FranziReport implements Serializable {
     }
 
     public void oeffnePdf() throws IOException {
-        PdfReader pdfReader = new PdfReader(dest);
-
+        if (Desktop.isDesktopSupported()) {
+            System.out.println("Hallo");
+            Desktop d = Desktop.getDesktop();
+            d.open(new File(dest));
+        }
 
     }
 
@@ -79,13 +83,15 @@ public class FranziReport implements Serializable {
 
             document.add(table);
             document.close();
-
+            oeffnePdf();
 
             System.out.println("Speiseplan erstellt");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

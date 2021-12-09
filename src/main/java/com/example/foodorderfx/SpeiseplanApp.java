@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class SpeiseplanApp extends Application {
     public static Stage skizzeStage;
-    public Image imageNotFound = new Image("C:\\Users\\Franzi\\FoodorderFX\\src\\main\\resources\\com\\example\\foodorderfx\\Bilder\\no-image-found.png");
+    public Image imageNotFound = new Image("file:/C:\\Users\\Franzi\\FoodorderFX\\src\\main\\resources\\com\\example\\foodorderfx\\Bilder\\no-image-found.png");
 
     public static void main(String[] args) {
         launch();
