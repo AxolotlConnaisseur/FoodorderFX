@@ -39,6 +39,8 @@ public class SpeiseBearbeitenController implements Serializable {
     @FXML
     private Button btDelete;
 
+    private double correctedPriceInput;
+
 
     Image emptyFill = new Image("File:///C:/Users/franz/Pictures/Speiseplan/Pngs/Empty.png");
     Image blank = new Image("File:///C:/Users/franz/Pictures/Speiseplan/Pngs/Blank.png");
@@ -82,8 +84,9 @@ public class SpeiseBearbeitenController implements Serializable {
             parsedPreis = parsedPreis.replace(',', '.');
         }
         String[] correctedInput = parsedPreis.split("\\h");
-        System.out.println("SpeiseBearbeitenController gerichtGiveBack methode zeile 74 lässt grüßen" + correctedInput[0]);
+        System.out.println("Corrected Input to be used as doule: " + correctedInput[0]);
         double preis = Double.parseDouble(correctedInput[0]);
+        correctedPriceInput = preis;
         gericht.setGerichtName(this.txtName.getText());
         gericht.setGerichtImg(this.imgView.getImage());
         gericht.setGerichtPreis(DecimalFormat.getCurrencyInstance().format(preis));
@@ -106,12 +109,12 @@ public class SpeiseBearbeitenController implements Serializable {
         boolean nameRichtig = false;
 
         //Validation of price input
-        if (this.txtPreis.getText().matches("^\\d{1,8}(,\\d{1,2})?")) {
+        if (this.txtPreis.getText().matches("^\\d{1,8}((,|.)\\d{1,2})?")) {
             preisRichtig = true;
 
-        } else if (this.txtPreis.getText().matches("^\\d{1,8}(,\\d{1,2})?.+?")) {
+        } else if (this.txtPreis.getText().matches("^\\d{1,8}((,|.)\\d{1,2})?.+?")) {
 
-            String[] correctedInput = this.txtPreis.getText().split("^\\d{1,8}(,\\d{1,2})?");
+            String[] correctedInput = this.txtPreis.getText().split("^\\d{1,8}((,|.)\\d{1,2})?");
             this.txtPreis.setText(correctedInput[0]);
             preisRichtig = true;
 
