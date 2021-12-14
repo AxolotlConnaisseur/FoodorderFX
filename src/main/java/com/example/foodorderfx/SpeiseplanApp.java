@@ -20,16 +20,16 @@ public class SpeiseplanApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         ArrayList<Gericht> gerichte = new ArrayList<>(Arrays.asList(
-                new Gericht("Montag A", imageNotFound, "1"),
-                new Gericht("Montag B", imageNotFound, "2"),
-                new Gericht("Dienstag A", imageNotFound, "3"),
-                new Gericht("Dienstag B", imageNotFound, "4"),
-                new Gericht("Mittwoch A", imageNotFound, "5"),
-                new Gericht("Mittwoch B", imageNotFound, "6"),
-                new Gericht("Donnerstag A", imageNotFound, "7"),
-                new Gericht("Donnerstag B", imageNotFound, "8"),
-                new Gericht("Freitag A", imageNotFound, "9"),
-                new Gericht("Freitag B", imageNotFound, "10")
+                new Gericht("Montag A", imageNotFound, 1),
+                new Gericht("Montag B", imageNotFound, 2),
+                new Gericht("Dienstag A", imageNotFound, 3),
+                new Gericht("Dienstag B", imageNotFound, 4),
+                new Gericht("Mittwoch A", imageNotFound, 5),
+                new Gericht("Mittwoch B", imageNotFound, 6),
+                new Gericht("Donnerstag A", imageNotFound, 7),
+                new Gericht("Donnerstag B", imageNotFound, 8),
+                new Gericht("Freitag A", imageNotFound, 9),
+                new Gericht("Freitag B", imageNotFound, 10)
         ));
 
         gerichte = SpeiseplanController.showDialog(gerichte);

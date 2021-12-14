@@ -108,7 +108,7 @@ public class FranziReport implements Serializable {
         addCellWithParagraph(table, "Preis:", 14F);
 
         for (Gericht gericht : gerichte) {
-            addCellWithParagraph(table, gericht.gerichtPreis, 14F);
+            addCellWithParagraph(table, String.valueOf(gericht.gerichtPreis), 14F);
 
         }
     }

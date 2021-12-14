@@ -146,43 +146,43 @@ public class SpeiseplanController implements Serializable {
         this.dialogData = gerichte;
 
         lblNameA1.setText(gerichte.get(0).gerichtName);
-        preisA1.setText(gerichte.get(0).gerichtPreis);
+        preisA1.setText(SpeiseBearbeitenController.formatPreis(gerichte.get(0).gerichtPreis));
         imgViewA1.setImage(gerichte.get(0).gerichtImg);
 
         lblNameB1.setText(gerichte.get(1).gerichtName);
-        preisB1.setText(gerichte.get(1).gerichtPreis);
+        preisB1.setText(SpeiseBearbeitenController.formatPreis(gerichte.get(1).gerichtPreis));
         imgViewB1.setImage(gerichte.get(1).gerichtImg);
 
         lblNameA2.setText(gerichte.get(2).gerichtName);
-        preisA2.setText(gerichte.get(2).gerichtPreis);
+        preisA2.setText(SpeiseBearbeitenController.formatPreis(gerichte.get(2).gerichtPreis));
         imgViewA2.setImage(gerichte.get(2).gerichtImg);
 
         lblNameB2.setText(gerichte.get(3).gerichtName);
-        preisB2.setText(gerichte.get(3).gerichtPreis);
+        preisB2.setText(SpeiseBearbeitenController.formatPreis(gerichte.get(3).gerichtPreis));
         imgViewB2.setImage(gerichte.get(3).gerichtImg);
 
         lblNameA3.setText(gerichte.get(4).gerichtName);
-        preisA3.setText(gerichte.get(4).gerichtPreis);
+        preisA3.setText(SpeiseBearbeitenController.formatPreis(gerichte.get(4).gerichtPreis));
         imgViewA3.setImage(gerichte.get(4).gerichtImg);
 
         lblNameB3.setText(gerichte.get(5).gerichtName);
-        preisB3.setText(gerichte.get(5).gerichtPreis);
+        preisB3.setText(SpeiseBearbeitenController.formatPreis(gerichte.get(5).gerichtPreis));
         imgViewB3.setImage(gerichte.get(5).gerichtImg);
 
         lblNameA4.setText(gerichte.get(6).gerichtName);
-        preisA4.setText(gerichte.get(6).gerichtPreis);
+        preisA4.setText(SpeiseBearbeitenController.formatPreis(gerichte.get(6).gerichtPreis));
         imgViewA4.setImage(gerichte.get(6).gerichtImg);
 
         lblNameB4.setText(gerichte.get(7).gerichtName);
-        preisB4.setText(gerichte.get(7).gerichtPreis);
+        preisB4.setText(SpeiseBearbeitenController.formatPreis(gerichte.get(7).gerichtPreis));
         imgViewB4.setImage(gerichte.get(7).gerichtImg);
 
         lblNameA5.setText(gerichte.get(8).gerichtName);
-        preisA5.setText(gerichte.get(8).gerichtPreis);
+        preisA5.setText(SpeiseBearbeitenController.formatPreis(gerichte.get(8).gerichtPreis));
         imgViewA5.setImage(gerichte.get(8).gerichtImg);
 
         lblNameB5.setText(gerichte.get(9).gerichtName);
-        preisB5.setText(gerichte.get(9).gerichtPreis);
+        preisB5.setText(SpeiseBearbeitenController.formatPreis(gerichte.get(9).gerichtPreis));
         imgViewB5.setImage(gerichte.get(9).gerichtImg);
 
     }
@@ -200,9 +200,10 @@ public class SpeiseplanController implements Serializable {
         Speiseplan speiseplan = new Speiseplan();
         speiseplan.setKw(kwSpinner.getValue());
         for (int i = 0; i < 10; i++) {
-            speiseplan.addGericht(i, new Gericht(relevantControls.nameLabels.get(i).getText(), relevantControls.imageViews.get(i).getImage(),
-                    relevantControls.preisLabels.get(i).getText()));
-
+            speiseplan.addGericht(i,
+                    new Gericht(relevantControls.nameLabels.get(i).getText(),
+                    relevantControls.imageViews.get(i).getImage(),
+                    SpeiseBearbeitenController.calculatePreis(relevantControls.preisLabels.get(i).getText())));
         }
 
         FranziReport f = new FranziReport(speiseplan);
@@ -226,12 +227,13 @@ public class SpeiseplanController implements Serializable {
             relevantControls.calculateIndex(source);
 
             Gericht aktuellesGericht = new Gericht(relevantControls.getLblName().getText(),
-                    relevantControls.getImageView().getImage(), relevantControls.getLblPreis().getText());
+                    relevantControls.getImageView().getImage(),
+                    SpeiseBearbeitenController.calculatePreis( relevantControls.getLblPreis().getText()));
 
-            Gericht updatedGericht = bearbeiteSpeise(aktuellesGericht);
+            Gericht updatedGericht = showDialog(aktuellesGericht);
 
             relevantControls.getLblName().setText(updatedGericht.gerichtName);
-            relevantControls.getLblPreis().setText(updatedGericht.gerichtPreis);
+            relevantControls.getLblPreis().setText(SpeiseBearbeitenController.formatPreis(updatedGericht.gerichtPreis));
             relevantControls.getImageView().setImage(updatedGericht.gerichtImg);
 
         }
@@ -239,7 +241,8 @@ public class SpeiseplanController implements Serializable {
     }
 
 
-    private Gericht bearbeiteSpeise(Gericht gericht) throws IOException {
+
+    private Gericht showDialog(Gericht gericht) throws IOException {
 
         Stage hauptfenster = (Stage) lblTag1.getScene().getWindow();
         Stage stage = new Stage();
@@ -250,14 +253,13 @@ public class SpeiseplanController implements Serializable {
         Parent root = fxmlLoader.load();
         stage.setTitle("Speiseplan bearbeiten");
 
-
         stage.setScene(new Scene(root));
         stage.initOwner(hauptfenster);
         stage.initModality(Modality.WINDOW_MODAL);
 
         stage.showAndWait();
 
-        return gerichtTransfer;
+        return SpeiseplanController.gerichtTransfer;
     }
 
 

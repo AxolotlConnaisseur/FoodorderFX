@@ -3,6 +3,7 @@ package com.example.foodorderfx.gui;
 import com.example.foodorderfx.SpeiseplanApp;
 import com.example.foodorderfx.used.Gericht;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,6 +39,7 @@ public class SpeiseBearbeitenController implements Serializable {
     private Button btUpdate;
     @FXML
     private Button btDelete;
+    public String priceInput;
 
     private double correctedPriceInput;
 
@@ -55,9 +57,10 @@ public class SpeiseBearbeitenController implements Serializable {
         }
         Gericht gericht = SpeiseplanController.gerichtTransfer;
         txtName.setText(gericht.gerichtName);
-        txtPreis.setText(gericht.gerichtPreis);
+        txtPreis.setText(SpeiseBearbeitenController.formatPreis(gericht.gerichtPreis));
         imgView.setImage(gericht.gerichtImg);
     }
+
 
     @FXML
     public void choosePic(MouseEvent mouseEvent) {
@@ -74,24 +77,7 @@ public class SpeiseBearbeitenController implements Serializable {
 
     }
 
-    public void gerichtGiveBack() {
-        Gericht gericht = new Gericht();
-        if (this.imgView.getImage() == null) {
-            this.imgView.setImage(emptyFill);
-        }
-        String parsedPreis =SpeiseplanController.gerichtTransfer.getGerichtPreis();
-        if (parsedPreis.contains(",")) {
-            parsedPreis = parsedPreis.replace(',', '.');
-        }
-        parsedPreis = parsedPreis.replaceAll("\\h€", "");
-        double preis = Double.parseDouble(parsedPreis);
 
-        gericht.setGerichtName(this.txtName.getText());
-        gericht.setGerichtImg(this.imgView.getImage());
-        gericht.setGerichtPreis(DecimalFormat.getCurrencyInstance().format(preis));
-        SpeiseplanController.gerichtTransfer = gericht;
-
-    }
 
     @FXML
     public void btCancelClick(ActionEvent e) {
@@ -102,20 +88,86 @@ public class SpeiseBearbeitenController implements Serializable {
 
     @FXML
     public void btUpdateClick(ActionEvent e) {
-        boolean preisRichtig = false;
+
+        double preis = calculatePreis(this.txtPreis.getText());
+        boolean nameRichtig = validateName();
+
+        if (preis >= 0 && nameRichtig) {
+
+            SpeiseplanController.gerichtTransfer = getGerichtFromControls();
+            Stage s = (Stage) btCancel.getScene().getWindow();
+
+            s.close();
+        }
+    }
+
+    public Gericht getGerichtFromControls() {
+
+        Gericht gericht = new Gericht(this.txtName.getText(),
+                (this.imgView.getImage() == null) ? emptyFill : this.imgView.getImage(),
+                SpeiseBearbeitenController.calculatePreis(this.txtPreis.getText())
+        );
+
+        return gericht;
+    }
+
+    static double calculatePreis(String text) {
+
+        double preisDouble;
+        String preis = normalizePreis(text);
+        try {
+            preisDouble = Double.parseDouble(preis);
+        } catch(NumberFormatException e) {
+            preisDouble = -1;
+        }
+        return preisDouble;
+    }
+
+    static String formatPreis(double value) {
+
+        return String.format("%.2f €", value);
+    }
+
+    private static String normalizePreis(String text) {
+
+        String result = text.replaceAll("\\h€", "");
+
+        if (result.contains(",")) {
+            result = result.replace(',', '.');
+        }
+        return result;
+    }
+
+    private boolean validateName() {
+
         boolean nameRichtig = false;
 
+        //Validation of name input
+        if (this.txtName.getText().matches("\\D++(\\s?\\D)*+")) {
+            nameRichtig = true;
+        } else {
+            this.txtName.setText("Ungültiger Name");
+            this.txtName.requestFocus();
+        }
+        return nameRichtig;
+    }
+
+    private boolean validatePreis() {
+
+        boolean preisRichtig = false;
+
+        String preis = this.txtPreis.getText();
         //Validation of price input
-        if (this.txtPreis.getText().matches("^\\d{1,8}((,|.)\\d{1,2})?")) {
+        if (preis.matches("^\\d{1,8}((,|.)\\d{1,2})?")) {
             preisRichtig = true;
 
-        } else if (this.txtPreis.getText().matches("^\\d{1,8}((,|.)\\d{1,2})?.+?")) {
+        } else if (preis.matches("^\\d{1,8}((,|.)\\d{1,2})?.+?")) {
 
-            String[] correctedInput = this.txtPreis.getText().split("^\\d{1,8}((,|.)\\d{1,2})?");
+            String[] correctedInput = preis.split("^\\d{1,8}((,|.)\\d{1,2})?");
             this.txtPreis.setText(correctedInput[0]);
             preisRichtig = true;
 
-        } else if (this.txtPreis.getText().matches("^\\d{1,8}((,|.)\\d{1,2})?\\s?€")) {
+        } else if (preis.matches("^\\d{1,8}((,|.)\\d{1,2})?\\s?€")) {
 
             String originalString = this.txtPreis.getText();
             originalString = originalString.replaceAll("\\s€", "");
@@ -126,22 +178,7 @@ public class SpeiseBearbeitenController implements Serializable {
             this.txtPreis.setText("Ungültiger Preis");
             this.txtPreis.requestFocus();
         }
-
-        //Validation of name input
-        if (this.txtName.getText().matches("\\D++(\\s?\\D)*+")) {
-            nameRichtig = true;
-        } else {
-            this.txtName.setText("Ungültiger Name");
-            this.txtName.requestFocus();
-        }
-
-        if (preisRichtig && nameRichtig) {
-            gerichtGiveBack();
-            Stage s = (Stage) btCancel.getScene().getWindow();
-
-            s.close();
-        }
-
+        return preisRichtig;
     }
 
     @FXML
@@ -179,7 +216,7 @@ public class SpeiseBearbeitenController implements Serializable {
         String nameNeu = "Name " + koordinaten;
         SpeiseplanController.gerichtTransfer.setGerichtName(nameNeu);
         SpeiseplanController.gerichtTransfer.setGerichtImg(blank);
-        SpeiseplanController.gerichtTransfer.setGerichtPreis("Preis");
+        SpeiseplanController.gerichtTransfer.setGerichtPreis(0);
 
     }
 }

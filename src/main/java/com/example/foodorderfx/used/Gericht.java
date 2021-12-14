@@ -10,15 +10,15 @@ public class Gericht implements Serializable {
     static final long serialVersionUID = 1L;
     public String gerichtName;
     public Image gerichtImg;
-    public String gerichtPreis;
+    public double gerichtPreis;
 
-    public Gericht(String gerichtName, Image gerichtImg, String gerichtPreis) {
+    public Gericht(String gerichtName, Image gerichtImg, double gerichtPreis) {
         this.gerichtName = gerichtName;
         this.gerichtImg = gerichtImg;
         this.gerichtPreis = gerichtPreis;
     }
 
-    public Gericht(String gerichtName, String gerichtPreis) {
+    public Gericht(String gerichtName, double gerichtPreis) {
         this.gerichtName = gerichtName;
         this.gerichtPreis = gerichtPreis;
     }
@@ -49,11 +49,11 @@ public class Gericht implements Serializable {
         this.gerichtImg = gerichtImg;
     }
 
-    public String getGerichtPreis() {
+    public double getGerichtPreis() {
         return gerichtPreis;
     }
 
-    public void setGerichtPreis(String gerichtPreis) {
+    public void setGerichtPreis(double gerichtPreis) {
         this.gerichtPreis = gerichtPreis;
     }
 }
