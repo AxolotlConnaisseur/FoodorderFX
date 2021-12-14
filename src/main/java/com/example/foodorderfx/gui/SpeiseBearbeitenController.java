@@ -79,19 +79,16 @@ public class SpeiseBearbeitenController implements Serializable {
         if (this.imgView.getImage() == null) {
             this.imgView.setImage(emptyFill);
         }
-        String parsedPreis = this.txtPreis.getText();
+        String parsedPreis =SpeiseplanController.gerichtTransfer.getGerichtPreis();
         if (parsedPreis.contains(",")) {
             parsedPreis = parsedPreis.replace(',', '.');
         }
-        String[] correctedInput = parsedPreis.split("\\h");
-        System.out.println("Corrected Input to be used as doule: " + correctedInput[0]);
-        double preis = Double.parseDouble(correctedInput[0]);
-        correctedPriceInput = preis;
+        parsedPreis = parsedPreis.replaceAll("\\h€", "");
+        double preis = Double.parseDouble(parsedPreis);
+
         gericht.setGerichtName(this.txtName.getText());
         gericht.setGerichtImg(this.imgView.getImage());
         gericht.setGerichtPreis(DecimalFormat.getCurrencyInstance().format(preis));
-        //5,0 €
-
         SpeiseplanController.gerichtTransfer = gericht;
 
     }
@@ -116,6 +113,13 @@ public class SpeiseBearbeitenController implements Serializable {
 
             String[] correctedInput = this.txtPreis.getText().split("^\\d{1,8}((,|.)\\d{1,2})?");
             this.txtPreis.setText(correctedInput[0]);
+            preisRichtig = true;
+
+        } else if (this.txtPreis.getText().matches("^\\d{1,8}((,|.)\\d{1,2})?\\s?€")) {
+
+            String originalString = this.txtPreis.getText();
+            originalString = originalString.replaceAll("\\s€", "");
+            this.txtPreis.setText(originalString);
             preisRichtig = true;
 
         } else {
