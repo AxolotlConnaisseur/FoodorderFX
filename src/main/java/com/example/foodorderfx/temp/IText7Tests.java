@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
-public class Playground {
+public class IText7Tests {
 
     public static void main(String args[]) throws Exception {
 
