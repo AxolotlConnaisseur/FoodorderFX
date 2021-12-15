@@ -95,6 +95,7 @@ public class FranziReport implements Serializable {
 
     }
 
+
     private void erstelleReihenVonGericht(Table table, String gerichtKategorie, Gericht[] gerichte) throws MalformedURLException {
 
         addCellWithParagraph(table, gerichtKategorie, 14F);

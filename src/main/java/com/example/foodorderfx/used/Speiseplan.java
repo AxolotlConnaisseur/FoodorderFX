@@ -1,8 +1,10 @@
 package com.example.foodorderfx.used;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Speiseplan implements Serializable {
+
     static final long serialVersionUID = 1L;
 
     public Gericht[] gerichte;
@@ -12,7 +14,7 @@ public class Speiseplan implements Serializable {
         this.gerichte = new Gericht[10];
     }
 
-    public void addGericht(int index, Gericht gericht) {
+    public void setGerichtInArray(int index, Gericht gericht) {
 
         this.gerichte[index] = gericht;
 
@@ -31,4 +33,13 @@ public class Speiseplan implements Serializable {
     public void setKw(int kw) {
         this.kw = kw;
     }
+
+    @Override
+    public String toString() {
+        return "Speiseplan{" +
+                "gerichte=" + Arrays.toString(gerichte) +
+                ", kw=" + kw +
+                '}';
+    }
+
 }

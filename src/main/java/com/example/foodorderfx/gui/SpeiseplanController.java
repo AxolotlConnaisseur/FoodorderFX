@@ -21,8 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -119,29 +118,41 @@ public class SpeiseplanController implements Serializable {
     @FXML
     public static Gericht gerichtTransfer;
     public static LocalDate[] gewaehlteWoche = new LocalDate[5];
+    public static String path = "C:\\Users\\Franzi\\FoodorderFX\\src\\main\\java\\com\\example\\foodorderfx\\pdf\\speiseplan.dat";
 
     ArrayList<Gericht> dialogData;
 
     static ClickedControls relevantControls;
 
-    public static ArrayList<Gericht> showDialog(ArrayList<Gericht> gerichte) throws IOException {
+    //Evtl Speiseplan Objekt zurückgeben statt ArrayList Gerichte
+    public static Speiseplan showDialog(Speiseplan speiseplan) throws IOException {
 
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(SpeiseplanApp.class.getResource("speiseplan.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         SpeiseplanController controller = fxmlLoader.getController();
-        controller.initializeFields(gerichte);
+        controller.initializeFields(speiseplan);
+
+
+        for (Gericht gericht : controller.dialogData) {
+            speiseplan.setGerichtInArray(controller.dialogData.indexOf(gericht), gericht);
+        }
 
         stage.setTitle("Speiseplan");
         stage.setScene(scene);
         SpeiseplanApp.skizzeStage = stage;
         stage.showAndWait();
 
-        return gerichte;
+        return speiseplan;
     }
 
-    private void initializeFields(ArrayList<Gericht> gerichte) {
+    private void initializeFields(Speiseplan speiseplan) {
+
+        ArrayList<Gericht> gerichte = new ArrayList<>();
+        for (Gericht gericht : speiseplan.gerichte) {
+            gerichte.add(gericht);
+        }
 
         this.dialogData = gerichte;
 
@@ -187,6 +198,40 @@ public class SpeiseplanController implements Serializable {
 
     }
 
+    public static void serializeObject(Speiseplan speiseplan, String path) {
+
+        FileOutputStream fos = null;
+        ObjectOutputStream out = null;
+
+        try {
+            //temp_dir = Files.createTempDirectory("franziSpeiseplan");
+            fos = new FileOutputStream(path);
+            out = new ObjectOutputStream(fos);
+            out.writeObject(speiseplan);
+            out.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static Speiseplan deSerializeObject(String path) {
+
+        Speiseplan speiseplan = null;
+        FileInputStream fis = null;
+        ObjectInputStream in = null;
+
+        try {
+            fis = new FileInputStream(path);
+            in = new ObjectInputStream(fis);
+            speiseplan = (Speiseplan) in.readObject();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return speiseplan;
+    }
 
     @FXML
     public void initialize() {
@@ -200,10 +245,10 @@ public class SpeiseplanController implements Serializable {
         Speiseplan speiseplan = new Speiseplan();
         speiseplan.setKw(kwSpinner.getValue());
         for (int i = 0; i < 10; i++) {
-            speiseplan.addGericht(i,
+            speiseplan.setGerichtInArray(i,
                     new Gericht(relevantControls.nameLabels.get(i).getText(),
-                    relevantControls.imageViews.get(i).getImage(),
-                    SpeiseBearbeitenController.calculatePreis(relevantControls.preisLabels.get(i).getText())));
+                            relevantControls.imageViews.get(i).getImage(),
+                            SpeiseBearbeitenController.calculatePreis(relevantControls.preisLabels.get(i).getText())));
         }
 
         FranziReport f = new FranziReport(speiseplan);
@@ -228,7 +273,7 @@ public class SpeiseplanController implements Serializable {
 
             Gericht aktuellesGericht = new Gericht(relevantControls.getLblName().getText(),
                     relevantControls.getImageView().getImage(),
-                    SpeiseBearbeitenController.calculatePreis( relevantControls.getLblPreis().getText()));
+                    SpeiseBearbeitenController.calculatePreis(relevantControls.getLblPreis().getText()));
 
             Gericht updatedGericht = showDialog(aktuellesGericht);
 
@@ -239,7 +284,6 @@ public class SpeiseplanController implements Serializable {
         }
 
     }
-
 
 
     private Gericht showDialog(Gericht gericht) throws IOException {
@@ -322,7 +366,7 @@ public class SpeiseplanController implements Serializable {
     }
 
     @FXML
-    public void handleButtonCancel() {
+    public void handleButtonCancel(ActionEvent e) {
         Scene scene = btCancel.getScene();
         Stage stage = (Stage) scene.getWindow();
         stage.close();
@@ -341,6 +385,14 @@ public class SpeiseplanController implements Serializable {
     @FXML
     private void handleButtonErstellen(ActionEvent e) {
 
+        aktualisiereSpeiseplanDialog();
+
+        closeStage(e);
+
+
+    }
+
+    private void aktualisiereSpeiseplanDialog() {
         String montagMenuA1Gericht = lblNameA1.getText();
         String montagMenuB1Gericht = lblNameB1.getText();
 
@@ -370,10 +422,38 @@ public class SpeiseplanController implements Serializable {
 
         this.dialogData.get(8).setGerichtName(montagMenuA5Gericht);
         this.dialogData.get(9).setGerichtName(montagMenuB5Gericht);
+    }
 
-        closeStage(e);
+    public void aktualisiereDialogData(Speiseplan speiseplan) {
+        String montagMenuA1Gericht = speiseplan.gerichte[0].gerichtName;
+        String montagMenuB1Gericht = lblNameB1.getText();
 
+        String montagMenuA2Gericht = lblNameA2.getText();
+        String montagMenuB2Gericht = lblNameB2.getText();
 
+        String montagMenuA3Gericht = lblNameA3.getText();
+        String montagMenuB3Gericht = lblNameB3.getText();
+
+        String montagMenuA4Gericht = lblNameA4.getText();
+        String montagMenuB4Gericht = lblNameB4.getText();
+
+        String montagMenuA5Gericht = lblNameA5.getText();
+        String montagMenuB5Gericht = lblNameB5.getText();
+
+        this.dialogData.get(0).setGerichtName(montagMenuA1Gericht);
+        this.dialogData.get(1).setGerichtName(montagMenuB1Gericht);
+
+        this.dialogData.get(2).setGerichtName(montagMenuA2Gericht);
+        this.dialogData.get(3).setGerichtName(montagMenuB2Gericht);
+
+        this.dialogData.get(4).setGerichtName(montagMenuA3Gericht);
+        this.dialogData.get(5).setGerichtName(montagMenuB3Gericht);
+
+        this.dialogData.get(6).setGerichtName(montagMenuA4Gericht);
+        this.dialogData.get(7).setGerichtName(montagMenuB4Gericht);
+
+        this.dialogData.get(8).setGerichtName(montagMenuA5Gericht);
+        this.dialogData.get(9).setGerichtName(montagMenuB5Gericht);
     }
 
     static void closeStage(ActionEvent e) {

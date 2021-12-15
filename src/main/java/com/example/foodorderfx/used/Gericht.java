@@ -7,9 +7,11 @@ import java.io.Serializable;
 
 
 public class Gericht implements Serializable {
-    static final long serialVersionUID = 1L;
+
+    static final long serialVersionUID = Speiseplan.serialVersionUID;
+
     public String gerichtName;
-    public Image gerichtImg;
+    public transient Image gerichtImg;
     public double gerichtPreis;
 
     public Gericht(String gerichtName, Image gerichtImg, double gerichtPreis) {
