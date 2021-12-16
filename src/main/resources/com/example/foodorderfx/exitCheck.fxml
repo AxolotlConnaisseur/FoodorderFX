@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="357.0" prefWidth="680.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.foodorderfx.gui.ExitCheckController">
+   <top>
+      <FlowPane alignment="CENTER" prefHeight="75.0" prefWidth="680.0" styleClass="root" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="lbl-extra-big-headline" text="Warnung!">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </FlowPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="260.0" prefWidth="680.0" styleClass="flow-pane" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btJa" layoutX="123.0" layoutY="197.0" mnemonicParsing="false" onAction="#handleBtJa" text="Ja" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="123.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="btNein" layoutX="477.0" layoutY="197.0" mnemonicParsing="false" onAction="#handleBtNein" text="Nein" AnchorPane.bottomAnchor="71.0" AnchorPane.rightAnchor="121.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Label layoutX="30.0" layoutY="69.0" styleClass="lblHeadline" text="Sollen die Änderungen gespeichert werden?">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

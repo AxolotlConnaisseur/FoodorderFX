@@ -1,9 +1,12 @@
 package com.example.foodorderfx;
 
+import com.example.foodorderfx.gui.ExitCheckController;
 import com.example.foodorderfx.gui.SpeiseplanController;
 import com.example.foodorderfx.used.Gericht;
 import com.example.foodorderfx.used.Speiseplan;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -19,19 +22,40 @@ public class SpeiseplanApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
         Speiseplan speiseplan = SpeiseplanController.deSerializeObject(SpeiseplanController.path);
 
         if (speiseplan == null) {
             speiseplan = erzeugeDefaultSpeiseplan();
         }
 
+        Speiseplan planBefore;
+        Speiseplan planAfter;
+
+
         System.out.println("Vor show dialog" + speiseplan);
         speiseplan = SpeiseplanController.showDialog(speiseplan);
+        planBefore = speiseplan;
+
 
         System.out.println("Nach Show Dialog" + speiseplan);
         SpeiseplanController.serializeObject(speiseplan, SpeiseplanController.path);
+        planAfter = speiseplan;
+
         System.out.println("Serialisiert");
+
+        if (Arrays.equals(planBefore.gerichte, planAfter.gerichte)) {
+
+        }else{
+            Stage exitStage = new Stage();
+            FXMLLoader exitFxmlLoader = new FXMLLoader(SpeiseplanApp.class.getResource("exitCheck.fxml"));
+            Scene exitScene = new Scene(exitFxmlLoader.load());
+
+            ExitCheckController exitCheckController = exitFxmlLoader.getController();
+
+            exitStage.setTitle("Ungespeicherte Änderungen");
+            exitStage.setScene(exitScene);
+            exitStage.showAndWait();
+        }
 
     }
 

@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.*;
 import java.time.DayOfWeek;
@@ -122,6 +123,7 @@ public class SpeiseplanController implements Serializable {
 
     ArrayList<Gericht> dialogData;
     Speiseplan speiseplanData;
+    static boolean safeChangesOnExit = false;
 
     static ClickedControls relevantControls;
 
@@ -145,11 +147,12 @@ public class SpeiseplanController implements Serializable {
         SpeiseplanApp.skizzeStage = stage;
         stage.showAndWait();
 
-        controller.aktualisiereSpeiseplanDialog();
-
-        for (Gericht gericht : controller.dialogData) {
-            speiseplan.setGerichtInArray(controller.dialogData.indexOf(gericht), gericht);
+        if(controller.safeChangesOnExit == true) {
+            controller.aktualisiereSpeiseplanDialog();
         }
+            for (Gericht gericht : controller.dialogData) {
+                speiseplan.setGerichtInArray(controller.dialogData.indexOf(gericht), gericht);
+            }
 
 
         return speiseplan;
