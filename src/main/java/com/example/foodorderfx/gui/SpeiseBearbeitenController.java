@@ -128,7 +128,7 @@ public class SpeiseBearbeitenController implements Serializable {
         return String.format("%.2f €", value);
     }
 
-    private static String normalizePreis(String text) {
+    public static String normalizePreis(String text) {
 
         String result = text.replaceAll("\\h€", "");
 

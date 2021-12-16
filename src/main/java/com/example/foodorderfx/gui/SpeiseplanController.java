@@ -121,6 +121,7 @@ public class SpeiseplanController implements Serializable {
     public static String path = "C:\\Users\\Franzi\\FoodorderFX\\src\\main\\java\\com\\example\\foodorderfx\\pdf\\speiseplan.dat";
 
     ArrayList<Gericht> dialogData;
+    Speiseplan speiseplanData;
 
     static ClickedControls relevantControls;
 
@@ -143,6 +144,13 @@ public class SpeiseplanController implements Serializable {
         stage.setScene(scene);
         SpeiseplanApp.skizzeStage = stage;
         stage.showAndWait();
+
+        controller.aktualisiereSpeiseplanDialog();
+
+        for (Gericht gericht : controller.dialogData) {
+            speiseplan.setGerichtInArray(controller.dialogData.indexOf(gericht), gericht);
+        }
+
 
         return speiseplan;
     }
@@ -393,67 +401,75 @@ public class SpeiseplanController implements Serializable {
     }
 
     private void aktualisiereSpeiseplanDialog() {
-        String montagMenuA1Gericht = lblNameA1.getText();
-        String montagMenuB1Gericht = lblNameB1.getText();
+        String gerichtA1Name = lblNameA1.getText();
+        String gerichtB1Name = lblNameB1.getText();
 
-        String montagMenuA2Gericht = lblNameA2.getText();
-        String montagMenuB2Gericht = lblNameB2.getText();
+        String gerichtA2Name = lblNameA2.getText();
+        String gerichtB2Name = lblNameB2.getText();
 
-        String montagMenuA3Gericht = lblNameA3.getText();
-        String montagMenuB3Gericht = lblNameB3.getText();
+        String gerichtA3Name = lblNameA3.getText();
+        String gerichtB3Name = lblNameB3.getText();
 
-        String montagMenuA4Gericht = lblNameA4.getText();
-        String montagMenuB4Gericht = lblNameB4.getText();
+        String gerichtA4Name = lblNameA4.getText();
+        String gerichtB4Name = lblNameB4.getText();
 
-        String montagMenuA5Gericht = lblNameA5.getText();
-        String montagMenuB5Gericht = lblNameB5.getText();
+        String gerichtA5Name = lblNameA5.getText();
+        String gerichtB5Name = lblNameB5.getText();
 
-        this.dialogData.get(0).setGerichtName(montagMenuA1Gericht);
-        this.dialogData.get(1).setGerichtName(montagMenuB1Gericht);
+        String gerichtA1Preis = SpeiseBearbeitenController.normalizePreis(preisA1.getText());
+        String gerichtB1Preis = SpeiseBearbeitenController.normalizePreis(preisB1.getText());
 
-        this.dialogData.get(2).setGerichtName(montagMenuA2Gericht);
-        this.dialogData.get(3).setGerichtName(montagMenuB2Gericht);
+        String gerichtA2Preis = SpeiseBearbeitenController.normalizePreis(preisA2.getText());
+        String gerichtB2Preis = SpeiseBearbeitenController.normalizePreis(preisB2.getText());
 
-        this.dialogData.get(4).setGerichtName(montagMenuA3Gericht);
-        this.dialogData.get(5).setGerichtName(montagMenuB3Gericht);
+        String gerichtA3Preis = SpeiseBearbeitenController.normalizePreis(preisA3.getText());
+        String gerichtB3Preis = SpeiseBearbeitenController.normalizePreis(preisB3.getText());
 
-        this.dialogData.get(6).setGerichtName(montagMenuA4Gericht);
-        this.dialogData.get(7).setGerichtName(montagMenuB4Gericht);
+        String gerichtA4Preis = SpeiseBearbeitenController.normalizePreis(preisA4.getText());
+        String gerichtB4Preis = SpeiseBearbeitenController.normalizePreis(preisB4.getText());
 
-        this.dialogData.get(8).setGerichtName(montagMenuA5Gericht);
-        this.dialogData.get(9).setGerichtName(montagMenuB5Gericht);
-    }
+        String gerichtA5Preis = SpeiseBearbeitenController.normalizePreis(preisA5.getText());
+        String gerichtB5Preis = SpeiseBearbeitenController.normalizePreis(preisB5.getText());
 
-    public void aktualisiereDialogData(Speiseplan speiseplan) {
-        String montagMenuA1Gericht = speiseplan.gerichte[0].gerichtName;
-        String montagMenuB1Gericht = lblNameB1.getText();
+        this.dialogData.get(0).setGerichtName(gerichtA1Name);
+        this.dialogData.get(0).setGerichtPreis(Double.parseDouble(gerichtA1Preis));
+        this.dialogData.get(0).setGerichtImg(imgViewA1.getImage());
 
-        String montagMenuA2Gericht = lblNameA2.getText();
-        String montagMenuB2Gericht = lblNameB2.getText();
+        this.dialogData.get(1).setGerichtName(gerichtB1Name);
+        this.dialogData.get(1).setGerichtPreis(Double.parseDouble(gerichtB1Preis));
+        this.dialogData.get(1).setGerichtImg(imgViewB1.getImage());
 
-        String montagMenuA3Gericht = lblNameA3.getText();
-        String montagMenuB3Gericht = lblNameB3.getText();
+        this.dialogData.get(2).setGerichtName(gerichtA2Name);
+        this.dialogData.get(2).setGerichtPreis(Double.parseDouble(gerichtA2Preis));
+        this.dialogData.get(2).setGerichtImg(imgViewA2.getImage());
 
-        String montagMenuA4Gericht = lblNameA4.getText();
-        String montagMenuB4Gericht = lblNameB4.getText();
+        this.dialogData.get(3).setGerichtName(gerichtB2Name);
+        this.dialogData.get(3).setGerichtPreis(Double.parseDouble(gerichtB2Preis));
+        this.dialogData.get(3).setGerichtImg(imgViewB2.getImage());
 
-        String montagMenuA5Gericht = lblNameA5.getText();
-        String montagMenuB5Gericht = lblNameB5.getText();
+        this.dialogData.get(4).setGerichtName(gerichtA3Name);
+        this.dialogData.get(4).setGerichtPreis(Double.parseDouble(gerichtA3Preis));
+        this.dialogData.get(4).setGerichtImg(imgViewA3.getImage());
 
-        this.dialogData.get(0).setGerichtName(montagMenuA1Gericht);
-        this.dialogData.get(1).setGerichtName(montagMenuB1Gericht);
+        this.dialogData.get(5).setGerichtName(gerichtB3Name);
+        this.dialogData.get(5).setGerichtPreis(Double.parseDouble(gerichtB3Preis));
+        this.dialogData.get(5).setGerichtImg(imgViewB3.getImage());
 
-        this.dialogData.get(2).setGerichtName(montagMenuA2Gericht);
-        this.dialogData.get(3).setGerichtName(montagMenuB2Gericht);
+        this.dialogData.get(6).setGerichtName(gerichtA4Name);
+        this.dialogData.get(6).setGerichtPreis(Double.parseDouble(gerichtA4Preis));
+        this.dialogData.get(6).setGerichtImg(imgViewA4.getImage());
 
-        this.dialogData.get(4).setGerichtName(montagMenuA3Gericht);
-        this.dialogData.get(5).setGerichtName(montagMenuB3Gericht);
+        this.dialogData.get(7).setGerichtName(gerichtB4Name);
+        this.dialogData.get(7).setGerichtPreis(Double.parseDouble(gerichtB4Preis));
+        this.dialogData.get(7).setGerichtImg(imgViewB4.getImage());
 
-        this.dialogData.get(6).setGerichtName(montagMenuA4Gericht);
-        this.dialogData.get(7).setGerichtName(montagMenuB4Gericht);
+        this.dialogData.get(8).setGerichtName(gerichtA5Name);
+        this.dialogData.get(8).setGerichtPreis(Double.parseDouble(gerichtA5Preis));
+        this.dialogData.get(8).setGerichtImg(imgViewA5.getImage());
 
-        this.dialogData.get(8).setGerichtName(montagMenuA5Gericht);
-        this.dialogData.get(9).setGerichtName(montagMenuB5Gericht);
+        this.dialogData.get(9).setGerichtName(gerichtB5Name);
+        this.dialogData.get(9).setGerichtPreis(Double.parseDouble(gerichtB5Preis));
+        this.dialogData.get(9).setGerichtImg(imgViewB5.getImage());
     }
 
     static void closeStage(ActionEvent e) {
